@@ -1,3 +1,3 @@
 #INFO132 repo
 
-cloned success.
+cloned success twice.
