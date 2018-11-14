@@ -19,19 +19,20 @@ def compile_friends_list(compiled_names, edgefilename):
 	edgelist=[]
 	for i in edgefilecontent:
 		edgelist.append(i.split('\t'))
-	friendslist=[]
-	for i in range(0,len(compiled_names)):
-		try:
-			print(compiled_names[i]+' har '+edgelist[i][1]+ ' venner.')
-		except:
-			print(compiled_names[i]+' har ingen venner.')
-
+	friendslist={}	
+	for k,v in compiled_names.items():
+		i = 0
+		for j in range(0,len(edgelist)):
+			if int(edgelist[j][0]) == k or int(edgelist[j][1]) == k:
+				i+=1 #Teller opp en for hver forkomst av en persons nøkkel/id.
+		friendslist.update({v:i})
+	return friendslist
 
 def main():
 	nodefilename='noder_15_13.csv'
 	edgefilename='kanter_15_13.csv'
 	compiled_names = compile_names(nodefilename)
-	compile_friends_list(compiled_names,edgefilename)
+	print(compile_friends_list(compiled_names,edgefilename))
 
 if __name__ == '__main__':
 	main()
